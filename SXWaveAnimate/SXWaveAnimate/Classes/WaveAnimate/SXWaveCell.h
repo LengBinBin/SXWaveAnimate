@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+/**
+ *  在需要的地方加入动画Cell需要如下几行代码。
+ *   SXWaveCell *cell = [SXWaveCell cell];
+ *   self.waveCell = cell;
+ *   [cell setPrecent:self.precent textColor:[UIColor orangeColor] type:0 alpha:1];
+ *   return cell;
+ */
 @interface SXWaveCell : UITableViewCell
 
 @property(nonatomic,assign)int precent;

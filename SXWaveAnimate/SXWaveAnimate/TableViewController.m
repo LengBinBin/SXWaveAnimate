@@ -11,9 +11,9 @@
 #import "UIViewAdditions.h"
 
 @interface TableViewController ()
-@property(nonatomic,strong)SXWaveCell *waveCell;
-@property(nonatomic,strong)SXWaveCell *waveCell2;
-@property(nonatomic,strong)SXWaveCell *waveCell3;
+@property(nonatomic,weak)SXWaveCell *waveCell;
+@property(nonatomic,weak)SXWaveCell *waveCell2;
+@property(nonatomic,weak)SXWaveCell *waveCell3;
 @end
 
 @implementation TableViewController
@@ -29,9 +29,16 @@
     [super viewDidAppear:animated];
     
     // ------在需要加入动画的地方
-    [self.waveCell addAnimateWithType:0];
-    [self.waveCell2 addAnimateWithType:0];
-    [self.waveCell3 addAnimateWithType:2];
+    if (_waveCell) {
+        [self.waveCell addAnimateWithType:0];
+    }
+    if (_waveCell2) {
+        [self.waveCell2 addAnimateWithType:0];
+    }
+    if (_waveCell3) {
+        [self.waveCell3 addAnimateWithType:2];
+    }
+
 
 }
 
@@ -42,10 +49,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        
         // ------在需要的地方加入动画Cell需要如下几行代码。
+        
         SXWaveCell *cell = [SXWaveCell cell];
         self.waveCell = cell;
+        
         [cell setPrecent:self.precent textColor:[UIColor orangeColor] type:0 alpha:1];
         return cell;
         
@@ -74,5 +82,9 @@
 {
     return 145;
 }
-
+-(void)dealloc{
+    self.waveCell = nil;
+    self.waveCell2 = nil;
+    self.waveCell3 = nil;
+}
 @end
